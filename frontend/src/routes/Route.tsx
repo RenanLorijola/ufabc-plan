@@ -1,8 +1,7 @@
 import React from 'react'
 import {
   RouteProps as ReactRouteProps,
-  Route as ReactRoute,
-  Redirect
+  Route as ReactRoute
 } from 'react-router-dom'
 
 interface RouteProps extends ReactRouteProps {
@@ -15,23 +14,12 @@ const Route = ({
   component: Component,
   ...rest
 }: RouteProps): JSX.Element => {
-  // your can put your logic here to check if user is authenticated
-  // with prop isPrivate and handle const below
-  const authenticated = false
-
   return (
     <ReactRoute
       {...rest}
-      render={({ location: from }) => {
-        return isPrivate === authenticated ? (
+      render={() => {
+        return (
           <Component />
-        ) : (
-          <Redirect
-            to={{
-              pathname: isPrivate ? '/' : '/restrict',
-              state: { from }
-            }}
-          />
         )
       }}
     />
