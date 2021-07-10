@@ -3,10 +3,12 @@ import { BrowserRouter as Router } from 'react-router-dom'
 
 import GlobalStyle from './styles/global'
 
+import { Header } from 'components'
 import Routes from './routes'
 
 const App = (): JSX.Element => (
   <Router>
+    <Header />
     <Routes />
     <GlobalStyle />
   </Router>

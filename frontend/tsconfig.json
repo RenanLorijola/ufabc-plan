@@ -22,14 +22,7 @@
     "isolatedModules": true,
     "noEmit": true,
     "jsx": "react-jsx",
-    "baseUrl": ".",
-    "paths": {
-      "@components*": ["./src/components"],
-      "@pages": ["./src/pages"],
-      "@tests": ["./src/tests"],
-      "@types": ["./src/types"],
-      "@api": ["./src/api"]
-    },
+    "baseUrl": "src",
     "typeRoots": [
       "./node_modules/@types",
       "./src/types"
