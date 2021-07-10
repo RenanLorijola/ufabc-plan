@@ -22,10 +22,17 @@
     "isolatedModules": true,
     "noEmit": true,
     "jsx": "react-jsx",
-    "baseUrl": "src",
+    "baseUrl": ".",
+    "paths": {
+      "@components*": ["./src/components"],
+      "@pages": ["./src/pages"],
+      "@tests": ["./src/tests"],
+      "@types": ["./src/types"],
+      "@api": ["./src/api"]
+    },
     "typeRoots": [
       "./node_modules/@types",
-      "./src/typings"
+      "./src/types"
     ],
     "noFallthroughCasesInSwitch": true
   },
