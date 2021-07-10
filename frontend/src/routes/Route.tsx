@@ -5,22 +5,15 @@ import {
 } from 'react-router-dom'
 
 interface RouteProps extends ReactRouteProps {
-  isPrivate?: boolean
   component: React.ComponentType
 }
 
-const Route = ({
-  isPrivate = false,
-  component: Component,
-  ...rest
-}: RouteProps): JSX.Element => {
+const Route = ({ component: Component, ...rest }: RouteProps): JSX.Element => {
   return (
     <ReactRoute
       {...rest}
       render={() => {
-        return (
-          <Component />
-        )
+        return <Component />
       }}
     />
   )
