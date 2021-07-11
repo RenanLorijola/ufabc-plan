@@ -25,7 +25,7 @@
     "baseUrl": "src",
     "typeRoots": [
       "./node_modules/@types",
-      "./src/typings"
+      "./src/types"
     ],
     "noFallthroughCasesInSwitch": true
   },
