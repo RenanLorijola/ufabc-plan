@@ -7,11 +7,13 @@ import { Header } from 'components'
 import Routes from './routes'
 
 const App = (): JSX.Element => (
-  <Router>
+  <>
     <Header />
-    <Routes />
-    <GlobalStyle />
-  </Router>
+    <Router>
+      <Routes />
+      <GlobalStyle />
+    </Router>
+  </>
 )
 
 export default App

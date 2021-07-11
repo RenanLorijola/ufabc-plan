@@ -1,12 +1,9 @@
+import SubjectTable from 'components/SubjectTable'
 import React from 'react'
-import { Container } from 'components'
+import { curso } from 'api/mocks'
 
 const Home: React.FC = (): JSX.Element => {
-  return (
-    <Container>
-      <h1>Hello World</h1>
-    </Container>
-  )
+  return <SubjectTable course={curso} />
 }
 
 export default Home
