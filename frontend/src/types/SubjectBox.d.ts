@@ -1,7 +1,4 @@
-export interface SubjectBoxProps {
-  name: string,
-  teorical: number,
-  practical: number,
-  individual: number,
-  type: 'BI' | 'CE' | 'limitado' | 'livre'
+import { Subject } from "./Subject";
+
+export interface SubjectBoxProps extends Subject{
 }

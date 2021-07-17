@@ -1,6 +1,6 @@
-import { SubjectBoxProps } from 'types'
+import { Subject } from 'types'
 
-const materiasQ1: SubjectBoxProps[] = [
+const materiasQ1: Subject[] = [
   {
     name: 'Base Experimental das Ciências Naturais',
     teorical: 0,
@@ -45,7 +45,7 @@ const materiasQ1: SubjectBoxProps[] = [
   }
 ]
 
-const materiasQ2: SubjectBoxProps[] = [
+const materiasQ2: Subject[] = [
   {
     name: 'Base Experimental das Ciências Naturais',
     teorical: 0,
@@ -90,7 +90,7 @@ const materiasQ2: SubjectBoxProps[] = [
   }
 ]
 
-const materiasQ3: SubjectBoxProps[] = [
+const materiasQ3: Subject[] = [
   {
     name: 'Base Experimental das Ciências Naturais',
     teorical: 0,

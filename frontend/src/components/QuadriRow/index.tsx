@@ -5,6 +5,7 @@ import StyledSubjectRow from './StyledSubjectRow'
 import StyledQuadriNameBox from './StyledQuadriNameBox'
 import StyledSubjectGrid from './StyledSubjectGrid'
 import StyledGridRowItem from './StyledGridRowItem'
+import AddSubjectBox from 'components/AddSubjectBox'
 
 const QuadriRow: React.FC<QuadriRowProps> = ({
   quadri,
@@ -17,6 +18,9 @@ const QuadriRow: React.FC<QuadriRowProps> = ({
         {subjects.map((subject) => {
           return <StyledSubjectGrid key={uuid()} subject={subject} />
         })}
+        <StyledSubjectGrid>
+          <AddSubjectBox />
+        </StyledSubjectGrid>
       </StyledSubjectRow>
     </StyledGridRowItem>
   )

@@ -16,8 +16,11 @@ const StyledQuadriNameBox = ({
         textAlign: 'center',
         padding: 1,
         borderLeftStyle: 'solid',
-        borderLeftWidth: 1,
-        borderLeftColor: 'black'
+        borderLeftWidth: 2,
+        borderLeftColor: 'black',
+        borderRightStyle: 'solid',
+        borderRightWidth: 1,
+        borderRightColor: 'black'
       }}
     >
       {quadri}º Quadrimestre

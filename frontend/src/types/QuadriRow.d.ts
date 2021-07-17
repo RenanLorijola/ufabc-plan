@@ -1,6 +1,6 @@
-import { SubjectBoxProps } from './SubjectBox'
+import { Subject } from './SubjectBox'
 
 export type QuadriRowProps = {
   quadri: number
-  subjects: SubjectBoxProps[]
+  subjects: Subject[]
 }
