@@ -10,14 +10,12 @@ const StyledGridRowItem = ({
     <Grid
       item
       xs={12}
+      sm={12}
+      md={12}
+      lg={12}
+      xl={12}
       sx={{
-        display: 'flex',
-        borderColor: 'black',
-        borderTopWidth: '1px',
-        borderBottomWidth: '1px',
-        borderLeftWidth: '0',
-        borderRight: '0',
-        borderStyle: 'solid'
+        display: 'flex'
       }}
     >
       {children}

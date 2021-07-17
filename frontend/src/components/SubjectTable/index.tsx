@@ -6,7 +6,15 @@ import { Grid } from '@material-ui/core'
 
 const SubjectTable = ({ course }: { course: Subject[][] }): JSX.Element => {
   return (
-    <Grid container sx={{ border: '1px black solid', borderRightWidth: 2 }}>
+    <Grid
+      container
+      sx={{
+        background: 'black',
+        border: '2px black solid',
+        borderLeft: 'none'
+      }}
+      spacing={0.25}
+    >
       {course.map((subjects, index) => {
         return <QuadriRow key={uuid()} subjects={subjects} quadri={index + 1} />
       })}

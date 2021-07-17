@@ -13,6 +13,7 @@ const StyledSubjectRow = ({
       sx={{
         overflowX: 'auto'
       }}
+      spacing={0.25}
     >
       {children}
     </Grid>

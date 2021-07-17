@@ -11,7 +11,7 @@ const StyledSubjectGrid = ({
   children?: React.ReactNode
 }): JSX.Element => {
   return (
-    <Grid item xs={4} minWidth={120} sm={3} md={3} lg={2} xl={2}>
+    <Grid item minWidth={120} xs={4} sm={3} md={3} lg={2} xl={2}>
       {subject ? (
         <SubjectBox
           teorical={subject.teorical}
