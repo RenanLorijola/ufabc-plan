@@ -1,6 +1,8 @@
 package br.com.ufabcplan.aluno;
 
+import javax.persistence.EntityManager;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 public class AlunoRequest {
 	
@@ -13,10 +15,14 @@ public class AlunoRequest {
 	@NotBlank
 	private String senha;
 	
-	public AlunoRequest(@NotBlank String ra, @NotBlank String nome, @NotBlank String senha) {
+	@NotNull 
+	private Long perfilId;
+
+	public AlunoRequest(@NotBlank String ra, @NotBlank String nome, @NotBlank String senha, @NotNull Long perfilId) {
 		this.ra = ra;
 		this.nome = nome;
 		this.senha = senha;
+		this.perfilId = perfilId;
 	}
 
 	public String getRa() {
@@ -30,8 +36,13 @@ public class AlunoRequest {
 		return senha;
 	}
 	
-	public Aluno paraEntidade() {
-		return new Aluno(ra, nome, senha);
+	public Long getPerfilId() {
+		return perfilId;
+	}
+
+	public Aluno paraEntidade(EntityManager manager) {
+		Perfil perfil = manager.find(Perfil.class, perfilId);
+		return new Aluno(ra, nome, new Senha(senha), perfil);
 	}
 	
 }
