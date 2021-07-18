@@ -1,9 +1,12 @@
+import React from 'react'
 import { Button } from '@material-ui/core'
 import AddIcon from '@material-ui/icons/Add'
 import StyledBoxTitle from 'components/SubjectBox/StyledBoxTitle'
-import React from 'react'
+import { AddSubjectBoxProps } from 'types'
 
-const AddSubjectBox: React.FC = (): JSX.Element => {
+const AddSubjectBox: React.FC<AddSubjectBoxProps> = ({
+  openDialog
+}): JSX.Element => {
   return (
     <Button
       variant="text"
@@ -18,6 +21,7 @@ const AddSubjectBox: React.FC = (): JSX.Element => {
         background: '#f1f1f1',
         borderRadius: '0px'
       }}
+      onClick={() => openDialog()}
     >
       <StyledBoxTitle name="Adicionar materia" />
       <AddIcon color="primary" fontSize="medium" />
