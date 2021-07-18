@@ -1,6 +1,6 @@
 {
-  "short_name": "[edit-me] React App Template TypeScript and StandardJS/Prettier",
-  "name": "[edit-me] React App Template TypeScript and StandardJS/Prettier",
+  "short_name": "UFABC Plan",
+  "name": "UFABC Plan - planejamento de matrícula",
   "icons": [
     {
       "src": "favicon.ico",
