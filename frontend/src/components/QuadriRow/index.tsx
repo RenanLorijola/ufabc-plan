@@ -1,5 +1,5 @@
 import React, { useState, useCallback } from 'react'
-import { QuadriRowProps } from 'types'
+import { QuadriRowProps, Subject } from 'types'
 import { v4 as uuid } from 'uuid'
 import StyledSubjectRow from './StyledSubjectRow'
 import StyledQuadriNameBox from './StyledQuadriNameBox'
@@ -8,6 +8,7 @@ import StyledGridRowItem from './StyledGridRowItem'
 import { AddSubjectBox, BlankSubjectBox, AddSubjectDialog } from 'components'
 import { useMediaQuery } from '@material-ui/core'
 import { useEffect } from 'react'
+import { todasMaterias } from 'api/mocks'
 
 const QuadriRow: React.FC<QuadriRowProps> = ({
   quadri,
@@ -17,13 +18,19 @@ const QuadriRow: React.FC<QuadriRowProps> = ({
   const [gridBoxes, setGridBoxes] = useState(5)
 
   const handleDialogClose = useCallback((): void => {
-    console.log('a')
     setDialogOpen(false)
   }, [])
 
   const handleDialogOpen = useCallback((): void => {
-    console.log('b')
     setDialogOpen(true)
+  }, [])
+
+  const handleAddSubjectInRow = useCallback((subject: Subject | null): void => {
+    if (!subject) {
+      return
+    }
+    subjects.push(subject)
+    todasMaterias.splice(todasMaterias.indexOf(subject), 1)
   }, [])
 
   const sm = useMediaQuery('(min-width:600px)')
@@ -43,7 +50,11 @@ const QuadriRow: React.FC<QuadriRowProps> = ({
 
   return (
     <>
-      <AddSubjectDialog open={dialogOpen} handleClose={handleDialogClose} />
+      <AddSubjectDialog
+        open={dialogOpen}
+        handleClose={handleDialogClose}
+        handleAddSubject={handleAddSubjectInRow}
+      />
       <StyledGridRowItem>
         <StyledQuadriNameBox quadri={quadri} />
         <StyledSubjectRow>
