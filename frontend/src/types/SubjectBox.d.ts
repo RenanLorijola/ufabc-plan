@@ -1,7 +1,7 @@
-export interface SubjectBoxProps {
+export interface SubjectBoxProps{
   name: string,
   teorical: number,
   practical: number,
   individual: number,
-  type: 'BI' | 'CE' | 'limitado' | 'livre'
+  type: 'BI' | 'CE' | 'limitado' | 'livre',
 }

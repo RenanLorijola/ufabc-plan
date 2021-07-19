@@ -1,2 +1,5 @@
 export type { SubjectBoxProps } from './SubjectBox'
 export type { QuadriRowProps } from './QuadriRow'
+export type { Subject } from './Subject'
+export type { AddSubjectDialogProps } from './AddSubjectDialog'
+export type { AddSubjectBoxProps } from './AddSubjectBox'

@@ -16,10 +16,7 @@ const StyledSubjectBox = ({
         flexGrow: 1,
         padding: 1,
         textAlign: 'center',
-        border: '1px black solid',
-        borderBottom: 'none',
-        borderTop: 'none',
-        background: COLORS[type]
+        background: COLORS.subject[type]
       }}
     >
       {children}

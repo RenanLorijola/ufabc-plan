@@ -1,7 +1,7 @@
 import React from 'react'
 import { SubjectBoxProps } from 'types'
 import StyledSubjectBox from './StyledSubjectBox'
-import StyledSubjectName from './StyledSubjectName'
+import StyledBoxTitle from './StyledBoxTitle'
 import StyledSubjectTPI from './StyledSubjectTPI'
 
 const SubjectBox: React.FC<SubjectBoxProps> = ({
@@ -13,7 +13,7 @@ const SubjectBox: React.FC<SubjectBoxProps> = ({
 }): JSX.Element => {
   return (
     <StyledSubjectBox type={type}>
-      <StyledSubjectName name={name} />
+      <StyledBoxTitle name={name} />
       <StyledSubjectTPI
         teorical={teorical}
         practical={practical}

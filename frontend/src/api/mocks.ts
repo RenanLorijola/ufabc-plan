@@ -1,52 +1,21 @@
-import { SubjectBoxProps } from 'types'
+import { Subject } from 'types'
 
-const materiasQ1: SubjectBoxProps[] = [
+const materiasQ1: Subject[] = []
+
+const materiasQ2: Subject[] = [
   {
+    id: 1,
     name: 'Base Experimental das Ciências Naturais',
     teorical: 0,
     practical: 3,
     individual: 2,
-    type: 'BI'
-  },
-  {
-    name: 'Base Computacionais da Ciência',
-    teorical: 0,
-    practical: 2,
-    individual: 2,
-    type: 'BI'
-  },
-  {
-    name: 'Bases Matemáticas',
-    teorical: 4,
-    practical: 0,
-    individual: 5,
-    type: 'BI'
-  },
-  {
-    name: 'Bases Conceituais da Energia',
-    teorical: 2,
-    practical: 0,
-    individual: 4,
-    type: 'BI'
-  },
-  {
-    name: 'Estrutura da Matéria',
-    teorical: 3,
-    practical: 0,
-    individual: 4,
-    type: 'BI'
-  },
-  {
-    name: 'Evolução e Diversificação da Vida na Terra',
-    teorical: 3,
-    practical: 0,
-    individual: 4,
     type: 'BI'
   }
 ]
 
-const materiasQ2: SubjectBoxProps[] = [
+const materiasQ3: Subject[] = [
   {
+    id: 1,
     name: 'Base Experimental das Ciências Naturais',
     teorical: 0,
     practical: 3,
@@ -54,86 +23,97 @@ const materiasQ2: SubjectBoxProps[] = [
     type: 'BI'
   },
   {
+    id: 2,
     name: 'Base Computacionais da Ciência',
     teorical: 0,
     practical: 2,
     individual: 2,
-    type: 'BI'
-  },
-  {
-    name: 'Bases Matemáticas',
-    teorical: 4,
-    practical: 0,
-    individual: 5,
-    type: 'BI'
-  },
-  {
-    name: 'Bases Conceituais da Energia',
-    teorical: 2,
-    practical: 0,
-    individual: 4,
-    type: 'BI'
-  },
-  {
-    name: 'Estrutura da Matéria',
-    teorical: 3,
-    practical: 0,
-    individual: 4,
-    type: 'BI'
-  },
-  {
-    name: 'Evolução e Diversificação da Vida na Terra',
-    teorical: 3,
-    practical: 0,
-    individual: 4,
     type: 'BI'
   }
 ]
 
-const materiasQ3: SubjectBoxProps[] = [
+const todasMaterias: Subject[] = [
   {
-    name: 'Base Experimental das Ciências Naturais',
+    id: 1,
+    name: 'Base Experimental das Ciências Naturais1',
     teorical: 0,
     practical: 3,
     individual: 2,
     type: 'BI'
   },
   {
-    name: 'Base Computacionais da Ciência',
+    id: 2,
+    name: 'Base Computacionais da Ciência1',
     teorical: 0,
     practical: 2,
     individual: 2,
     type: 'BI'
   },
   {
-    name: 'Bases Matemáticas',
-    teorical: 4,
-    practical: 0,
-    individual: 5,
+    id: 3,
+    name: 'Base Experimental das Ciências Naturais2',
+    teorical: 0,
+    practical: 3,
+    individual: 2,
     type: 'BI'
   },
   {
-    name: 'Bases Conceituais da Energia',
-    teorical: 2,
-    practical: 0,
-    individual: 4,
-    type: 'CE'
+    id: 4,
+    name: 'Base Computacionais da Ciência2',
+    teorical: 0,
+    practical: 2,
+    individual: 2,
+    type: 'BI'
   },
   {
-    name: 'Estrutura da Matéria',
-    teorical: 3,
-    practical: 0,
-    individual: 4,
-    type: 'limitado'
+    id: 5,
+    name: 'Base Experimental das Ciências Naturais3',
+    teorical: 0,
+    practical: 3,
+    individual: 2,
+    type: 'BI'
   },
   {
-    name: 'Evolução e Diversificação da Vida na Terra',
-    teorical: 3,
-    practical: 0,
-    individual: 4,
-    type: 'livre'
+    id: 6,
+    name: 'Base Computacionais da Ciência3',
+    teorical: 0,
+    practical: 2,
+    individual: 2,
+    type: 'BI'
+  },
+  {
+    id: 7,
+    name: 'Base Experimental das Ciências Naturais4',
+    teorical: 0,
+    practical: 3,
+    individual: 2,
+    type: 'BI'
+  },
+  {
+    id: 8,
+    name: 'Base Computacionais da Ciência4',
+    teorical: 0,
+    practical: 2,
+    individual: 2,
+    type: 'BI'
+  },
+  {
+    id: 9,
+    name: 'Base Experimental das Ciências Naturais5',
+    teorical: 0,
+    practical: 3,
+    individual: 2,
+    type: 'BI'
+  },
+  {
+    id: 10,
+    name: 'Base Computacionais da Ciência5',
+    teorical: 0,
+    practical: 2,
+    individual: 2,
+    type: 'BI'
   }
 ]
 
 const curso = [materiasQ1, materiasQ2, materiasQ3]
-export { curso }
+export { curso, todasMaterias }
