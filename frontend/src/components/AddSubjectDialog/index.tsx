@@ -19,6 +19,7 @@ const AddSubjectDialog: React.FC<AddSubjectDialogProps> = ({
   handleAddSubject
 }): JSX.Element => {
   const [selectedSubject, setSelectedSubject] = useState<Subject | null>(null)
+
   return (
     <Dialog open={open} onClose={() => handleClose()}>
       <DialogTitle>Adicione matérias no quadrimestre</DialogTitle>
@@ -31,7 +32,7 @@ const AddSubjectDialog: React.FC<AddSubjectDialogProps> = ({
           id="combo-box-demo"
           getOptionLabel={(option) => option.name}
           options={todasMaterias}
-          onChange={(event: any, value: Subject | null) => {
+          onChange={(event, value: Subject | null) => {
             setSelectedSubject(value)
           }}
           noOptionsText="Nenhuma matéria encontrada"

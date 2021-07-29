@@ -5,14 +5,17 @@ import GlobalStyle from './styles/global'
 import theme from 'styles/theme'
 import { Header } from 'components'
 import Routes from './routes'
+import AlertProvider from 'context/alertContext'
 
 const App = (): JSX.Element => (
   <ThemeProvider theme={theme}>
-    <Header />
-    <Router>
-      <Routes />
-      <GlobalStyle />
-    </Router>
+    <AlertProvider>
+      <Header />
+      <Router>
+        <Routes />
+        <GlobalStyle />
+      </Router>
+    </AlertProvider>
   </ThemeProvider>
 )
 

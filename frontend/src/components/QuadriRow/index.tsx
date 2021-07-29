@@ -25,13 +25,16 @@ const QuadriRow: React.FC<QuadriRowProps> = ({
     setDialogOpen(true)
   }, [])
 
-  const handleAddSubjectInRow = useCallback((subject: Subject | null): void => {
-    if (!subject) {
-      return
-    }
-    subjects.push(subject)
-    todasMaterias.splice(todasMaterias.indexOf(subject), 1)
-  }, [])
+  const handleAddSubjectInRow = useCallback(
+    (subject: Subject | null): void => {
+      if (!subject) {
+        return
+      }
+      subjects.push(subject)
+      todasMaterias.splice(todasMaterias.indexOf(subject), 1)
+    },
+    [subjects]
+  )
 
   const sm = useMediaQuery('(min-width:600px)')
   const lg = useMediaQuery('(min-width:1200px)')
