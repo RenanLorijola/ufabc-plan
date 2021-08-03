@@ -6,15 +6,18 @@ import theme from 'styles/theme'
 import { Header } from 'components'
 import Routes from './routes'
 import AlertProvider from 'context/alertContext'
+import SubjectsProvider from 'context/subjectsContext'
 
 const App = (): JSX.Element => (
   <ThemeProvider theme={theme}>
     <AlertProvider>
-      <Header />
-      <Router>
-        <Routes />
-        <GlobalStyle />
-      </Router>
+      <SubjectsProvider>
+        <Header />
+        <Router>
+          <Routes />
+          <GlobalStyle />
+        </Router>
+      </SubjectsProvider>
     </AlertProvider>
   </ThemeProvider>
 )

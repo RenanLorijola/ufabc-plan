@@ -1,5 +1,5 @@
 export type AddSubjectDialogProps = {
   open: boolean
-  handleClose: Function
-  handleAddSubject: Function
+  handleClose: () => void
+  handleAddSubject: (subject: Subject | null) => void
 }

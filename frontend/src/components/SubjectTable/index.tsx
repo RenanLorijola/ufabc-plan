@@ -1,23 +1,34 @@
 import React from 'react'
-import { Subject } from 'types'
 import { v4 as uuid } from 'uuid'
 import { QuadriRow } from 'components'
 import { Grid } from '@material-ui/core'
+import AddQuadriRow from 'components/AddQuadriRow'
+import { useSubjects } from 'context/subjectsContext'
 
-const SubjectTable = ({ course }: { course: Subject[][] }): JSX.Element => {
+const SubjectTable = (): JSX.Element => {
+  const { subjects } = useSubjects()
+
   return (
     <Grid
       container
       sx={{
         background: 'black',
         border: '2px black solid',
+        borderTopWidth: 1,
         borderLeft: 'none'
       }}
       spacing={0.25}
     >
-      {course.map((subjects, index) => {
-        return <QuadriRow key={uuid()} subjects={subjects} quadri={index + 1} />
+      {subjects.map((quadriSubjects, index: number) => {
+        return (
+          <QuadriRow
+            key={uuid()}
+            subjects={quadriSubjects}
+            quadri={index + 1}
+          />
+        )
       })}
+      <AddQuadriRow />
     </Grid>
   )
 }

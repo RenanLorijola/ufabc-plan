@@ -9,7 +9,6 @@ import { useState } from 'react'
 import AlertComponent from 'components/Alert'
 import { AlertContextProps } from 'types'
 import { useCallback } from 'react'
-import { useEffect } from 'react'
 
 const AlertContext = createContext<AlertContextProps>({
   displayAlert: () => {
@@ -27,10 +26,6 @@ const AlertProvider: React.FC = ({ children }) => {
     onClose.current?.()
     setOpen(false)
   }, [onClose])
-
-  useEffect(() => {
-    if (!open) onClose.current = undefined
-  })
 
   const displayAlert = (
     message: string,

@@ -8,7 +8,7 @@ import StyledGridRowItem from './StyledGridRowItem'
 import { AddSubjectBox, BlankSubjectBox, AddSubjectDialog } from 'components'
 import { useMediaQuery } from '@material-ui/core'
 import { useEffect } from 'react'
-import { todasMaterias } from 'api/mocks'
+import { useSubjects } from 'context/subjectsContext'
 
 const QuadriRow: React.FC<QuadriRowProps> = ({
   quadri,
@@ -16,6 +16,8 @@ const QuadriRow: React.FC<QuadriRowProps> = ({
 }): JSX.Element => {
   const [dialogOpen, setDialogOpen] = useState(false)
   const [gridBoxes, setGridBoxes] = useState(5)
+
+  const { handleRemoveAvailableSubject, handleAddSubject } = useSubjects()
 
   const handleDialogClose = useCallback((): void => {
     setDialogOpen(false)
@@ -30,10 +32,10 @@ const QuadriRow: React.FC<QuadriRowProps> = ({
       if (!subject) {
         return
       }
-      subjects.push(subject)
-      todasMaterias.splice(todasMaterias.indexOf(subject), 1)
+      handleAddSubject(subject, quadri)
+      handleRemoveAvailableSubject(subject)
     },
-    [subjects]
+    [handleAddSubject, handleRemoveAvailableSubject, quadri]
   )
 
   const sm = useMediaQuery('(min-width:600px)')
