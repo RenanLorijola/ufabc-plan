@@ -52,7 +52,8 @@ public class Aluno implements UserDetails {
 		this.nome = nome;
 		this.perfis.add(perfil);
 	}
-	
+
+	@Deprecated
 	public Aluno() {}
 
 	public Long getId() {
@@ -109,5 +110,5 @@ public class Aluno implements UserDetails {
 	public boolean isEnabled() {
 		return true;
 	}
-	
+
 }

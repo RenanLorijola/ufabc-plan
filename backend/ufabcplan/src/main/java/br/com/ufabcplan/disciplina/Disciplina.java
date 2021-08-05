@@ -1,9 +1,9 @@
 package br.com.ufabcplan.disciplina;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import br.com.ufabcplan.curso.relacionamento.disciplina_bachareladointerdiciplinar.DisciplinaBachareladoInterdiciplinar;
+import br.com.ufabcplan.curso.relacionamento.disciplina_cursoespecifico.DisciplinaCursoEspecifico;
+
+import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
@@ -28,6 +28,12 @@ public class Disciplina {
 	
 	@NotNull
 	private Integer creditos;
+
+	@OneToOne(mappedBy = "disciplina")
+	private DisciplinaBachareladoInterdiciplinar cursoBIRelacionado;
+
+	@OneToOne(mappedBy = "disciplina")
+	private DisciplinaCursoEspecifico cursoCERelacionado;
 	
 	public Disciplina(String nome, Integer teoria, Integer pratica, Integer individual) {
 		this.nome = nome;
@@ -36,9 +42,14 @@ public class Disciplina {
 		this.individual = individual;
 		this.creditos = pratica + teoria;
 	}
-	
+
+	@Deprecated
 	public Disciplina() {}
-	
+
+	public Long getId() {
+		return id;
+	}
+
 	public String getNome() {
 		return nome;
 	}
@@ -58,5 +69,26 @@ public class Disciplina {
 	public Integer getCreditos() {
 		return creditos;
 	}
-	
+
+	public DisciplinaBachareladoInterdiciplinar getCursoBIRelacionado() {
+		return cursoBIRelacionado;
+	}
+
+	public DisciplinaCursoEspecifico getCursoCERelacionado() {
+		return cursoCERelacionado;
+	}
+
+	@Override
+	public String toString() {
+		return "Disciplina{" +
+				"id=" + id +
+				", nome='" + nome + '\'' +
+				", teoria=" + teoria +
+				", pratica=" + pratica +
+				", individual=" + individual +
+				", creditos=" + creditos +
+				", cursoBIRelacionado=" + cursoBIRelacionado +
+				", cursoCERelacionado=" + cursoCERelacionado +
+				'}';
+	}
 }

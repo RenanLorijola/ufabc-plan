@@ -1,5 +1,5 @@
 package br.com.ufabcplan.curso.relacionamento;
 
 public enum TipoCurso {
-	LIVRE, OBRIGATORIA, LIMITADA
+	OBRIGATORIA, OBRIGATORIA_BI, LIMITADA
 }

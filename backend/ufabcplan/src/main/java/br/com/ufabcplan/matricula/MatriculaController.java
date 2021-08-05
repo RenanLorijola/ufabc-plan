@@ -17,15 +17,24 @@ public class MatriculaController {
 
 	@PersistenceContext
 	private EntityManager manager;
-	
-	
-	@PostMapping
+
+	@PostMapping("/curso/bi")
 	@Transactional
-	public ResponseEntity<?> matricularAluno(@RequestBody MatriculaRequest request) {
-		Matricula novaMatricula = request.toModel(manager);
-		
+	public ResponseEntity<MatriculaResponse> matricularAlunoNoCursdBI(@RequestBody MatriculaRequest request) {
+		Matricula novaMatricula = request.toModelBI(manager);
+
 		manager.persist(novaMatricula);
-		
-		return ResponseEntity.status(HttpStatus.OK).build();
+
+		return ResponseEntity.status(HttpStatus.OK).body(new MatriculaResponse(novaMatricula));
+	}
+
+	@PostMapping("/curso/ce")
+	@Transactional
+	public ResponseEntity<MatriculaResponse> matricularAlunoNoCursdCE(@RequestBody MatriculaRequest request) {
+		Matricula novaMatricula = request.toModelCE(manager);
+
+		manager.persist(novaMatricula);
+
+		return ResponseEntity.status(HttpStatus.OK).body(new MatriculaResponse(novaMatricula));
 	}
 }

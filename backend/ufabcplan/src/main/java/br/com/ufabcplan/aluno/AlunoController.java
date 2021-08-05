@@ -1,6 +1,8 @@
 package br.com.ufabcplan.aluno;
 
 import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.transaction.Transactional;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,22 +16,23 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/alunos")
 public class AlunoController {
-	
+
+	@PersistenceContext
+	private EntityManager manager;
+
 	@Autowired
 	private AlunoRepository repository;
 	
-	@Autowired 
-	private EntityManager manager;
-	
-	public AlunoController(AlunoRepository repository) {
-		this.repository = repository;
-	}
-	
 	@PostMapping
+	@Transactional
 	public ResponseEntity<AlunoResponse> cadastrarAluno(@RequestBody @Valid AlunoRequest request) {
+		if(repository.existsByRa(request.getRa())) {
+			return ResponseEntity.status(HttpStatus.CONFLICT).build();
+		}
+
 		Aluno novoAluno = request.paraEntidade(manager);
 		
-		repository.save(novoAluno); 
+		repository.save(novoAluno);
 		return ResponseEntity.status(HttpStatus.CREATED).body(new AlunoResponse(novoAluno));
 	}
 	

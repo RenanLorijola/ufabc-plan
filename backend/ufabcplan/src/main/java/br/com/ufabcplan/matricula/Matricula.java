@@ -8,7 +8,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 
 import br.com.ufabcplan.aluno.Aluno;
-import br.com.ufabcplan.curso.cursobi.CursoBI;
+import br.com.ufabcplan.curso.bachareladointerdiciplinar.BachareladoInterdiciplinar;
+import br.com.ufabcplan.curso.cursoespecifico.CursoEspecifico;
 
 @Entity
 public class Matricula {
@@ -20,13 +21,21 @@ public class Matricula {
 	@OneToOne
 	@JoinColumn(name = "fk_aluno_id")
 	private Aluno aluno;
-	
+
 	@OneToOne
-	private CursoBI cursoBI;
+	private BachareladoInterdiciplinar bachareladoInterdiciplinar;
+
+	@OneToOne
+	private CursoEspecifico cursoEspecifico;
 	
-	public Matricula(Aluno aluno, CursoBI cursoBI) {
+	public Matricula(Aluno aluno, BachareladoInterdiciplinar bachareladoInterdiciplinar) {
 		this.aluno = aluno;
-		this.cursoBI = cursoBI;
+		this.bachareladoInterdiciplinar = bachareladoInterdiciplinar;
+	}
+
+	public Matricula(Aluno aluno, CursoEspecifico cursoEspecifico) {
+		this.aluno = aluno;
+		this.cursoEspecifico = cursoEspecifico;
 	}
 
 	@Deprecated
@@ -40,8 +49,11 @@ public class Matricula {
 		return aluno;
 	}
 
-	public CursoBI getCursoBI() {
-		return cursoBI;
+	public BachareladoInterdiciplinar getCursoBI() {
+		return bachareladoInterdiciplinar;
 	}
 
+	public CursoEspecifico getCursoCE() {
+		return cursoEspecifico;
+	}
 }

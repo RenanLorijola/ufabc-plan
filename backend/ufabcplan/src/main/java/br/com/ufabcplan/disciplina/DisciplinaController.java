@@ -1,30 +1,43 @@
 package br.com.ufabcplan.disciplina;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 import javax.validation.Valid;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/disciplinas")
 public class DisciplinaController {
 
-	@PersistenceContext
-	private EntityManager manager;
-	
+	@Autowired
+	private DisciplinaRepository repository;
+
 	@PostMapping
 	@Transactional
-	public ResponseEntity<?> cadastrarDisciplina(@RequestBody @Valid DisciplinaRequest request) {
+	public ResponseEntity<DisciplinaResponse> cadastrarDisciplina(@RequestBody @Valid DisciplinaRequest request) {
+		if(repository.existsByNome(request.getNome())) {
+			return ResponseEntity.status(HttpStatus.CONFLICT).build();
+		}
+
 		Disciplina novaDisciplina = request.toModel();
-		manager.persist(novaDisciplina);
+		repository.save(novaDisciplina);
 		
-		return ResponseEntity.status(HttpStatus.CREATED).build();
+		return ResponseEntity.status(HttpStatus.CREATED).body(new DisciplinaResponse(novaDisciplina));
 	}
+
+	@GetMapping
+	public ResponseEntity<List<DisciplinaDetalheResponse>> consultarTodasDisciplinas() {
+		List<DisciplinaDetalheResponse> disciplinas = repository.findAll()
+				.stream().map(disciplina -> new DisciplinaDetalheResponse(disciplina))
+				.collect(Collectors.toList());
+
+		return ResponseEntity.ok(disciplinas);
+	}
+
 }

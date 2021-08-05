@@ -3,30 +3,33 @@ package br.com.ufabcplan.matricula;
 import javax.persistence.EntityManager;
 
 import br.com.ufabcplan.aluno.Aluno;
-import br.com.ufabcplan.curso.cursobi.CursoBI;
+import br.com.ufabcplan.curso.bachareladointerdiciplinar.BachareladoInterdiciplinar;
+import br.com.ufabcplan.curso.cursoespecifico.CursoEspecifico;
 
 public class MatriculaRequest {
 
 	private Long alunoId;
 	
-	private Long cursoBiId;
+	private Long cursoId;
 	
-	public MatriculaRequest(Long alunoId, Long cursoBiId) {
+	public MatriculaRequest(Long alunoId, Long cursoId) {
 		this.alunoId = alunoId;
-		this.cursoBiId = cursoBiId;
+		this.cursoId = cursoId;
 	}
 
 	public Long getAlunoId() {
 		return alunoId;
 	}
 
-	public Long getCursoBiId() {
-		return cursoBiId;
+	public Long getCursoId() {
+		return cursoId;
 	}
 	
-	public Matricula toModel(EntityManager manager) {
-		
-		return new Matricula(manager.find(Aluno.class, alunoId),
-				manager.find(CursoBI.class, cursoBiId));
+	public Matricula toModelBI(EntityManager manager) {
+		return new Matricula(manager.find(Aluno.class, alunoId), manager.find(BachareladoInterdiciplinar.class, cursoId));
+	}
+
+	public Matricula toModelCE(EntityManager manager) {
+		return new Matricula(manager.find(Aluno.class, alunoId), manager.find(CursoEspecifico.class, cursoId));
 	}
 }

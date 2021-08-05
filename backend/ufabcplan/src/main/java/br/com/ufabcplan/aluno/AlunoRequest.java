@@ -15,7 +15,7 @@ public class AlunoRequest {
 	@NotBlank
 	private String senha;
 	
-	@NotNull 
+	@NotNull
 	private Long perfilId;
 
 	public AlunoRequest(@NotBlank String ra, @NotBlank String nome, @NotBlank String senha, @NotNull Long perfilId) {
@@ -32,6 +32,7 @@ public class AlunoRequest {
 	public String getNome() {
 		return nome;
 	}
+
 	public String getSenha() {
 		return senha;
 	}

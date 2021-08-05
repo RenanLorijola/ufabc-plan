@@ -19,9 +19,9 @@ import br.com.ufabcplan.config.security.auth.dto.TokenDto;
 @RestController
 @RequestMapping("/auth")
 public class AutenticacaoController {
-	
+
 	@Autowired
-	private AuthenticationManager authManager;
+	private AuthenticationManager authenticationManager;
 	
 	@Autowired
 	private TokenService tokenService;
@@ -31,7 +31,7 @@ public class AutenticacaoController {
 		UsernamePasswordAuthenticationToken dadosLogin = request.converter();
 
 		try {
-			Authentication authentication = authManager.authenticate(dadosLogin);
+			Authentication authentication = authenticationManager.authenticate(dadosLogin);
 			String token = tokenService.gerarToken(authentication);
 			return ResponseEntity.ok(new TokenDto(token, "Bearer"));
 		} catch (AuthenticationException e) {

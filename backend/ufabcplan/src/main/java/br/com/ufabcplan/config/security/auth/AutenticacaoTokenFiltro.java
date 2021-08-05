@@ -36,7 +36,7 @@ public class AutenticacaoTokenFiltro extends OncePerRequestFilter {
 	
 	private void autenticarUsuario(String token) {
 		
-		Aluno aluno = tokenService.getAluno(token);
+		Aluno aluno = tokenService.getAluno(token);;
 		
 		UsernamePasswordAuthenticationToken authentication = 
 				new UsernamePasswordAuthenticationToken(aluno, null, aluno.getAuthorities());
