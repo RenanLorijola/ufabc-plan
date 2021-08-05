@@ -15,9 +15,8 @@ const StyledQuadriNameBox = ({
         transform: 'rotate(180deg)',
         textAlign: 'center',
         padding: 1,
-        borderLeftStyle: 'solid',
-        borderLeftWidth: 1,
-        borderLeftColor: 'black'
+        background: 'white',
+        borderLeft: '2px black solid'
       }}
     >
       {quadri}º Quadrimestre
