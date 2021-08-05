@@ -10,8 +10,8 @@ import {
 } from '@material-ui/core'
 import React from 'react'
 import { AddSubjectDialogProps, Subject } from 'types'
-import { todasMaterias } from 'api/mocks'
 import { useState } from 'react'
+import { useSubjects } from 'context/subjectsContext'
 
 const AddSubjectDialog: React.FC<AddSubjectDialogProps> = ({
   open,
@@ -19,6 +19,9 @@ const AddSubjectDialog: React.FC<AddSubjectDialogProps> = ({
   handleAddSubject
 }): JSX.Element => {
   const [selectedSubject, setSelectedSubject] = useState<Subject | null>(null)
+
+  const { allAvailableSubjects } = useSubjects()
+
   return (
     <Dialog open={open} onClose={() => handleClose()}>
       <DialogTitle>Adicione matérias no quadrimestre</DialogTitle>
@@ -28,12 +31,12 @@ const AddSubjectDialog: React.FC<AddSubjectDialogProps> = ({
         </DialogContentText>
         <Autocomplete
           disablePortal
-          id="combo-box-demo"
           getOptionLabel={(option) => option.name}
-          options={todasMaterias}
-          onChange={(event: any, value: Subject | null) => {
+          options={allAvailableSubjects}
+          onChange={(event, value: Subject | null) => {
             setSelectedSubject(value)
           }}
+          isOptionEqualToValue={(option, value) => option.id === value.id}
           noOptionsText="Nenhuma matéria encontrada"
           sx={{
             width: '100%',

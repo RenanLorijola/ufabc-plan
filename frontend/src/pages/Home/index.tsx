@@ -1,11 +1,21 @@
 import { SubjectTable, Container } from 'components'
 import React from 'react'
-import { curso } from 'api/mocks'
 
 const Home: React.FC = (): JSX.Element => {
   return (
     <Container>
-      <SubjectTable course={curso} />
+      <div
+        style={{
+          alignItems: 'center',
+          display: 'flex',
+          marginTop: 20,
+          minHeight: 'calc(100vh - 128px)'
+        }}
+      >
+        <div style={{ height: 'fit-content' }}>
+          <SubjectTable />
+        </div>
+      </div>
     </Container>
   )
 }

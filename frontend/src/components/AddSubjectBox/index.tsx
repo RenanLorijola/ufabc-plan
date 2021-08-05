@@ -9,7 +9,7 @@ const AddSubjectBox: React.FC<AddSubjectBoxProps> = ({
 }): JSX.Element => {
   return (
     <Button
-      variant="text"
+      variant="contained"
       color="primary"
       sx={{
         height: '100%',
@@ -18,13 +18,12 @@ const AddSubjectBox: React.FC<AddSubjectBoxProps> = ({
         flexDirection: 'column',
         justifyContent: 'center',
         border: 'none',
-        background: '#f1f1f1',
         borderRadius: '0px'
       }}
       onClick={() => openDialog()}
     >
-      <StyledBoxTitle name="Adicionar materia" />
-      <AddIcon color="primary" fontSize="medium" />
+      <StyledBoxTitle name="Adicionar matéria" />
+      <AddIcon sx={{ color: '#fff' }} fontSize="medium" />
     </Button>
   )
 }

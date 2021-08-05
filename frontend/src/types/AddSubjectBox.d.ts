@@ -1,3 +1,3 @@
 export type AddSubjectBoxProps = {
-  openDialog: Function
+  openDialog: () => void
 }
