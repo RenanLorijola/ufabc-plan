@@ -49,6 +49,10 @@ const SubjectsProvider: React.FC = ({ children }) => {
     setAllAvailableSubjects(subjectsToAdd)
   }, [])
 
+  useEffect(() => {
+    console.log(subjects)
+  }, [subjects])
+
   const handleRemoveAvailableSubject = useCallback((subject: Subject): void => {
     setAllAvailableSubjects((sbjs) => {
       sbjs.splice(sbjs.indexOf(subject), 1)

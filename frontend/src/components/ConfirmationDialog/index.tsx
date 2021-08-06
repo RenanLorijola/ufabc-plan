@@ -41,7 +41,7 @@ const ConfirmationDialog: React.FC<any> = ({
       <DialogActions>
         <Button onClick={handleClose}>Cancelar</Button>
         <Button color="error" onClick={handleConfirm}>
-          Deletar
+          Excluir
         </Button>
       </DialogActions>
     </Dialog>
