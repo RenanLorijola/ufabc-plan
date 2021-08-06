@@ -12,7 +12,7 @@ const Home: React.FC = (): JSX.Element => {
           minHeight: 'calc(100vh - 128px)'
         }}
       >
-        <div style={{ height: 'fit-content' }}>
+        <div style={{ height: 'fit-content', width: '100%' }}>
           <SubjectTable />
         </div>
       </div>

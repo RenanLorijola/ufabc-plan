@@ -64,7 +64,13 @@ const QuadriRow: React.FC<QuadriRowProps> = ({
         <StyledQuadriNameBox quadri={quadri} />
         <StyledSubjectRow>
           {subjects.map((subject) => {
-            return <StyledSubjectGrid key={uuid()} subject={subject} />
+            return (
+              <StyledSubjectGrid
+                key={uuid()}
+                subject={subject}
+                quadri={quadri}
+              />
+            )
           })}
           <StyledSubjectGrid>
             <AddSubjectBox openDialog={handleDialogOpen} />

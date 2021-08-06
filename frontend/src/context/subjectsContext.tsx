@@ -23,6 +23,12 @@ const SubjectsContext = createContext<SubjectContextProps>({
   },
   handleRemoveAvailableSubject: () => {
     // default value.
+  },
+  handleRemoveQuadri: () => {
+    // default value.
+  },
+  handleRemoveSubject: () => {
+    // default value.
   }
 })
 
@@ -42,10 +48,6 @@ const SubjectsProvider: React.FC = ({ children }) => {
     )
     setAllAvailableSubjects(subjectsToAdd)
   }, [])
-
-  useEffect(() => {
-    console.log(subjects)
-  }, [subjects])
 
   const handleRemoveAvailableSubject = useCallback((subject: Subject): void => {
     setAllAvailableSubjects((sbjs) => {
@@ -75,9 +77,36 @@ const SubjectsProvider: React.FC = ({ children }) => {
     []
   )
 
+  const handleRemoveSubject = useCallback(
+    (subject: Subject, quadri: number): void => {
+      const subjectsArray = [...subjects]
+      const row = subjectsArray[quadri - 1].filter(
+        (sub) => sub.id !== subject.id
+      )
+      subjectsArray[quadri - 1] = row
+      setSubjects(subjectsArray)
+      setAllAvailableSubjects((subs) =>
+        [...subs, subject].sort((a, b) => (a.id > b.id ? 1 : -1))
+      )
+    },
+    [subjects]
+  )
+
   const handleAddQuadri = useCallback((): void => {
     setSubjects([...subjects, []])
   }, [setSubjects, subjects])
+
+  const handleRemoveQuadri = useCallback(
+    (quadri: number): void => {
+      setAllAvailableSubjects((subs) =>
+        [...subs, ...subjects[quadri - 1]].sort((a, b) =>
+          a.id > b.id ? 1 : -1
+        )
+      )
+      setSubjects(subjects.filter((_, index) => index !== quadri - 1))
+    },
+    [setSubjects, subjects]
+  )
 
   return (
     <SubjectsContext.Provider
@@ -88,7 +117,9 @@ const SubjectsProvider: React.FC = ({ children }) => {
         handleAddAvailableSubject,
         handleSetSubjects,
         handleAddSubject,
-        handleAddQuadri
+        handleRemoveSubject,
+        handleAddQuadri,
+        handleRemoveQuadri
       }}
     >
       {children}
