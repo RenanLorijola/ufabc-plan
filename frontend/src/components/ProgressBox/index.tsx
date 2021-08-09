@@ -33,7 +33,8 @@ const ProgressBox: React.FC<any> = ({
         }}
       >
         <Typography fontWeight={700}>
-          {displayName[type]} {initials ?? ''}: {progress}/{total}
+          {displayName[type]}
+          {initials && ` ${initials}`}: {progress}/{total}
         </Typography>
       </div>
     </Grid>

@@ -17,7 +17,7 @@ const QuadriRow: React.FC<QuadriRowProps> = ({
   const [dialogOpen, setDialogOpen] = useState(false)
   const [gridBoxes, setGridBoxes] = useState(5)
 
-  const { handleRemoveAvailableSubject, handleAddSubject } = useSubjects()
+  const { handleAddSubject } = useSubjects()
 
   const handleDialogClose = useCallback((): void => {
     setDialogOpen(false)
@@ -33,9 +33,8 @@ const QuadriRow: React.FC<QuadriRowProps> = ({
         return
       }
       handleAddSubject(subject, quadri)
-      handleRemoveAvailableSubject(subject)
     },
-    [handleAddSubject, handleRemoveAvailableSubject, quadri]
+    [handleAddSubject, quadri]
   )
 
   const sm = useMediaQuery('(min-width:600px)')

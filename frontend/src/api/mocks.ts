@@ -7,6 +7,7 @@ const todasMaterias: Subject[] = [
     teorical: 0,
     practical: 3,
     individual: 2,
+    creditos: 3,
     type: 'BI'
   },
   {
@@ -15,7 +16,8 @@ const todasMaterias: Subject[] = [
     teorical: 0,
     practical: 2,
     individual: 2,
-    type: 'BI'
+    creditos: 2,
+    type: 'CE'
   },
   {
     id: 3,
@@ -23,6 +25,7 @@ const todasMaterias: Subject[] = [
     teorical: 0,
     practical: 3,
     individual: 2,
+    creditos: 3,
     type: 'BI'
   },
   {
@@ -31,7 +34,8 @@ const todasMaterias: Subject[] = [
     teorical: 0,
     practical: 2,
     individual: 2,
-    type: 'BI'
+    creditos: 2,
+    type: 'livre'
   },
   {
     id: 5,
@@ -39,6 +43,7 @@ const todasMaterias: Subject[] = [
     teorical: 0,
     practical: 3,
     individual: 2,
+    creditos: 3,
     type: 'BI'
   },
   {
@@ -47,7 +52,8 @@ const todasMaterias: Subject[] = [
     teorical: 0,
     practical: 2,
     individual: 2,
-    type: 'BI'
+    creditos: 2,
+    type: 'CE'
   },
   {
     id: 7,
@@ -55,7 +61,8 @@ const todasMaterias: Subject[] = [
     teorical: 0,
     practical: 3,
     individual: 2,
-    type: 'BI'
+    creditos: 3,
+    type: 'limitado'
   },
   {
     id: 8,
@@ -63,7 +70,8 @@ const todasMaterias: Subject[] = [
     teorical: 0,
     practical: 2,
     individual: 2,
-    type: 'BI'
+    creditos: 2,
+    type: 'limitado'
   },
   {
     id: 9,
@@ -71,6 +79,7 @@ const todasMaterias: Subject[] = [
     teorical: 0,
     practical: 3,
     individual: 2,
+    creditos: 3,
     type: 'BI'
   },
   {
@@ -79,10 +88,34 @@ const todasMaterias: Subject[] = [
     teorical: 0,
     practical: 2,
     individual: 2,
+    creditos: 2,
     type: 'BI'
   }
 ]
 
-const curso: Subject[][] = [[]]
+const disciplinasCursadas: Subject[][] = [[]]
 
-export { curso, todasMaterias }
+const curso = {
+  nome: 'BCC',
+  sigla: 'BCC',
+  obrigatorias: 70,
+  obrigatoriasBI: 90,
+  limitadas: 30,
+  livres: 12
+}
+
+const matricula = {
+  disciplinas: disciplinasCursadas,
+  livres: 0,
+  limitadas: 0,
+  obrigatoriasBI: 0,
+  obrigatoriasCE: 0,
+  cursoCE: 'BCC',
+  cursoBI: 'BC&T'
+}
+
+const aluno = {
+  nome: 'Renan'
+}
+
+export { matricula, curso, aluno, todasMaterias }

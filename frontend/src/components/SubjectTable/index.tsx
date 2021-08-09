@@ -3,11 +3,9 @@ import { v4 as uuid } from 'uuid'
 import { QuadriRow } from 'components'
 import { Grid } from '@material-ui/core'
 import AddQuadriRow from 'components/AddQuadriRow'
-import { useSubjects } from 'context/subjectsContext'
+import { Subject } from 'types'
 
-const SubjectTable = (): JSX.Element => {
-  const { subjects } = useSubjects()
-
+const SubjectTable = ({ subjects }: { subjects: Subject[][] }): JSX.Element => {
   return (
     <Grid
       container
