@@ -47,9 +47,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http.authorizeRequests()
-			.antMatchers(HttpMethod.POST, "/auth").permitAll()
-			.antMatchers(HttpMethod.POST, "/alunos").permitAll()
-			.anyRequest().authenticated()
+//			.antMatchers(HttpMethod.POST, "/auth").permitAll()
+//			.antMatchers(HttpMethod.POST, "/alunos").permitAll()
+//			.anyRequest().authenticated()
+			.antMatchers("/**").permitAll()
 			.and().csrf().disable()
 			.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
 			.and().addFilterBefore(new AutenticacaoTokenFiltro(tokenService), UsernamePasswordAuthenticationFilter.class);
@@ -57,7 +58,12 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
 	@Override
 	public void configure(WebSecurity web) throws Exception {
-		super.configure(web);
+		web.ignoring().antMatchers(
+				"/**.html",
+				"/v2/api-docs",
+				"/webjars/**",
+				"/configuration/**",
+				"/swagger-resources/**");
 	}
 
 }

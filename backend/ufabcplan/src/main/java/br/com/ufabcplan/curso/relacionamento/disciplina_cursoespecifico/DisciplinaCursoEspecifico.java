@@ -1,6 +1,7 @@
 package br.com.ufabcplan.curso.relacionamento.disciplina_cursoespecifico;
 
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -10,10 +11,9 @@ import br.com.ufabcplan.curso.relacionamento.TipoCurso;
 import br.com.ufabcplan.disciplina.Disciplina;
 
 @Entity
-@Table(name = "cursoCE_Disciplina")
 public class DisciplinaCursoEspecifico extends RelacionamentoCurso {
 
-	@OneToOne
+	@ManyToOne
 	private CursoEspecifico cursoEspecifico;
 
 	public DisciplinaCursoEspecifico(Disciplina disciplina, TipoCurso tipoDoCurso, CursoEspecifico cursoEspecifico) {

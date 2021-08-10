@@ -2,10 +2,13 @@ package br.com.ufabcplan.disciplina;
 
 import br.com.ufabcplan.curso.relacionamento.disciplina_bachareladointerdiciplinar.DisciplinaBachareladoInterdiciplinar;
 import br.com.ufabcplan.curso.relacionamento.disciplina_cursoespecifico.DisciplinaCursoEspecifico;
+import br.com.ufabcplan.matricula.quadrimestre.Quadrimestre;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import java.util.List;
+import java.util.Objects;
 
 @Entity
 public class Disciplina {
@@ -29,11 +32,11 @@ public class Disciplina {
 	@NotNull
 	private Integer creditos;
 
-	@OneToOne(mappedBy = "disciplina")
-	private DisciplinaBachareladoInterdiciplinar cursoBIRelacionado;
+	@OneToMany(mappedBy = "disciplina")
+	private List<DisciplinaBachareladoInterdiciplinar> cursoBIRelacionado;
 
-	@OneToOne(mappedBy = "disciplina")
-	private DisciplinaCursoEspecifico cursoCERelacionado;
+	@OneToMany(mappedBy = "disciplina")
+	private List<DisciplinaCursoEspecifico> cursoCERelacionado;
 	
 	public Disciplina(String nome, Integer teoria, Integer pratica, Integer individual) {
 		this.nome = nome;
@@ -70,11 +73,11 @@ public class Disciplina {
 		return creditos;
 	}
 
-	public DisciplinaBachareladoInterdiciplinar getCursoBIRelacionado() {
+	public List<DisciplinaBachareladoInterdiciplinar> getCursoBIRelacionado() {
 		return cursoBIRelacionado;
 	}
 
-	public DisciplinaCursoEspecifico getCursoCERelacionado() {
+	public List<DisciplinaCursoEspecifico> getCursoCERelacionado() {
 		return cursoCERelacionado;
 	}
 
@@ -90,5 +93,18 @@ public class Disciplina {
 				", cursoBIRelacionado=" + cursoBIRelacionado +
 				", cursoCERelacionado=" + cursoCERelacionado +
 				'}';
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (!(o instanceof Disciplina)) return false;
+		Disciplina that = (Disciplina) o;
+		return Objects.equals(id, that.id);
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(id);
 	}
 }

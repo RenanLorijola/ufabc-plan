@@ -17,6 +17,7 @@ import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
+import br.com.ufabcplan.matricula.quadrimestre.Quadrimestre;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -33,7 +34,7 @@ public class Aluno implements UserDetails {
 	private String ra;
 	
 	@NotBlank
-	@Column(name = "nome", unique = false, nullable = false, length = 50)
+	@Column(name = "nome", nullable = false, length = 50)
 	private String nome;
 	
 	@NotBlank
@@ -76,6 +77,24 @@ public class Aluno implements UserDetails {
 		return matricula;
 	}
 
+	public void atualizarDados(String ra, Senha senha) {
+		this.ra = ra;
+		this.senha = senha.hash();
+	}
+
+	public boolean quadrimestrePertenceAluno(Long idMatricula) {
+		List<Quadrimestre> quadrimestres = getMatricula().getQuadrimestres();
+		boolean possuiMatricula = quadrimestres.stream().anyMatch(quadrimestre -> quadrimestre.getId() == idMatricula);
+		return possuiMatricula;
+	}
+
+	public boolean cursadaPertenceAluno(Long idCursada) {
+		List<Quadrimestre> quadrimestres = getMatricula().getQuadrimestres();
+		boolean cursou = quadrimestres.stream().anyMatch(quadrimestre ->
+				quadrimestre.getDisciplinas().stream().anyMatch(cursada -> cursada.getId() == idCursada));
+		return cursou;
+	}
+
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		return this.perfis;
@@ -111,4 +130,13 @@ public class Aluno implements UserDetails {
 		return true;
 	}
 
+	@Override
+	public String toString() {
+		return "Aluno{" +
+				"id=" + id +
+				", ra='" + ra + '\'' +
+				", nome='" + nome + '\'' +
+				", senha='" + senha + '\'' +
+				'}';
+	}
 }

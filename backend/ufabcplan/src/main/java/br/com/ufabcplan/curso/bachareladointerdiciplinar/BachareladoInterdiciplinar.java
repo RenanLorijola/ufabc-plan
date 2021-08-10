@@ -5,6 +5,9 @@ import javax.persistence.*;
 import br.com.ufabcplan.curso.Curso;
 import br.com.ufabcplan.curso.relacionamento.disciplina_bachareladointerdiciplinar.DisciplinaBachareladoInterdiciplinar;
 
+import java.util.List;
+import java.util.Objects;
+
 @Entity
 public class BachareladoInterdiciplinar extends Curso {
 
@@ -12,8 +15,8 @@ public class BachareladoInterdiciplinar extends Curso {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@OneToOne(mappedBy = "bachareladoInterdiciplinar")
-	private DisciplinaBachareladoInterdiciplinar cursoBIRelacionado;
+	@OneToMany(mappedBy = "bachareladoInterdiciplinar")
+	private List<DisciplinaBachareladoInterdiciplinar> relacionamentos;
 
 	public BachareladoInterdiciplinar(String nome, String codigo, Integer livre, Integer limitada, Integer obrigatoria) {
 		super(nome, codigo, livre, limitada, obrigatoria);
@@ -25,7 +28,20 @@ public class BachareladoInterdiciplinar extends Curso {
 		return id;
 	}
 
-	public DisciplinaBachareladoInterdiciplinar getCursoBIRelacionado() {
-		return cursoBIRelacionado;
+	public List<DisciplinaBachareladoInterdiciplinar> getRelacionamentos() {
+		return relacionamentos;
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (!(o instanceof BachareladoInterdiciplinar)) return false;
+		BachareladoInterdiciplinar that = (BachareladoInterdiciplinar) o;
+		return Objects.equals(id, that.id);
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(id);
 	}
 }

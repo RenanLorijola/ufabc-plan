@@ -1,15 +1,18 @@
 package br.com.ufabcplan.matricula;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 import br.com.ufabcplan.aluno.Aluno;
 import br.com.ufabcplan.curso.bachareladointerdiciplinar.BachareladoInterdiciplinar;
 import br.com.ufabcplan.curso.cursoespecifico.CursoEspecifico;
+import br.com.ufabcplan.matricula.quadrimestre.Quadrimestre;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 @Entity
 public class Matricula {
@@ -19,23 +22,46 @@ public class Matricula {
 	private Long id;
 	
 	@OneToOne
-	@JoinColumn(name = "fk_aluno_id")
+	@NotNull
 	private Aluno aluno;
 
-	@OneToOne
+	@ManyToOne
 	private BachareladoInterdiciplinar bachareladoInterdiciplinar;
 
-	@OneToOne
+	@ManyToOne
 	private CursoEspecifico cursoEspecifico;
-	
+
+	@OneToMany(cascade = CascadeType.ALL)
+	private List<Quadrimestre> quadrimestres = new ArrayList<>();
+
+	@NotNull
+	private Integer livre;
+
+	@NotNull
+	private Integer limitada;
+
+	@NotNull
+	private Integer obrigatoriaCE;
+
+	@NotNull
+	private Integer obrigatoriaBi;
+
 	public Matricula(Aluno aluno, BachareladoInterdiciplinar bachareladoInterdiciplinar) {
 		this.aluno = aluno;
 		this.bachareladoInterdiciplinar = bachareladoInterdiciplinar;
+		this.livre = 0;
+		this.limitada = 0;
+		this.obrigatoriaCE = 0;
+		this.obrigatoriaBi = 0;
 	}
 
 	public Matricula(Aluno aluno, CursoEspecifico cursoEspecifico) {
 		this.aluno = aluno;
 		this.cursoEspecifico = cursoEspecifico;
+		this.livre = 0;
+		this.limitada = 0;
+		this.obrigatoriaCE = 0;
+		this.obrigatoriaBi = 0;
 	}
 
 	@Deprecated
@@ -49,11 +75,76 @@ public class Matricula {
 		return aluno;
 	}
 
-	public BachareladoInterdiciplinar getCursoBI() {
+	public BachareladoInterdiciplinar getBachareladoInterdiciplinar() {
 		return bachareladoInterdiciplinar;
 	}
 
-	public CursoEspecifico getCursoCE() {
+	public Integer getLivre() {
+		return livre;
+	}
+
+	public Integer getLimitada() {
+		return limitada;
+	}
+
+	public Integer getObrigatoriaCE() {
+		return obrigatoriaCE;
+	}
+
+	public Integer getObrigatoriaBi() {
+		return obrigatoriaBi;
+	}
+
+	public CursoEspecifico getCursoEspecifico() {
 		return cursoEspecifico;
+	}
+
+	public List<Quadrimestre> getQuadrimestres() {
+		return quadrimestres;
+	}
+
+	public Quadrimestre buscarQuadrimestre(Long id) {
+		for(Quadrimestre quadrimestre : quadrimestres) {
+			if(quadrimestre.getId() == id) return quadrimestre;
+		}
+		return null;
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (!(o instanceof Matricula)) return false;
+		Matricula matricula = (Matricula) o;
+		return id.equals(matricula.id);
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(id);
+	}
+
+	public void criarQuadrimestre(Quadrimestre quadrimestres) {
+		this.quadrimestres.add(quadrimestres);
+	}
+
+	public static <T> Collector<T, ?, T> toSingleton() {
+		return Collectors.collectingAndThen(
+				Collectors.toList(),
+				list -> {
+					if (list.size() != 1) {
+						throw new IllegalStateException();
+					}
+					return list.get(0);
+				}
+		);
+	}
+
+	@Override
+	public String toString() {
+		return "Matricula{" +
+				"id=" + id +
+				", aluno=" + aluno +
+				", quadrimestres=" + quadrimestres +
+				'}';
 	}
 }
