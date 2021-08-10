@@ -3,11 +3,12 @@ import { Switch } from 'react-router-dom'
 
 import Route from './Route'
 
-import { Home } from 'pages'
+import { Home, Matricula } from 'pages'
 
 const Routes = (): JSX.Element => (
   <Switch>
     <Route path="/" exact component={Home} />
+    <Route path="/matricula" exact component={Matricula} />
   </Switch>
 )
 

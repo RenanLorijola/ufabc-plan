@@ -44,6 +44,7 @@ const AddSubjectDialog: React.FC<AddSubjectDialogProps> = ({
             marginLeft: 'auto',
             marginRight: 'auto'
           }}
+          value={selectedSubject}
           renderInput={(params) => <TextField {...params} label="Matéria" />}
         />
       </DialogContent>
@@ -54,6 +55,7 @@ const AddSubjectDialog: React.FC<AddSubjectDialogProps> = ({
           onClick={() => {
             handleAddSubject(selectedSubject)
             handleClose()
+            setSelectedSubject(null)
           }}
         >
           Adicionar

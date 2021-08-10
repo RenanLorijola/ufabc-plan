@@ -1,18 +1,31 @@
 import React from 'react'
-import { SubjectBoxProps } from 'types'
 import StyledSubjectBox from './StyledSubjectBox'
 import StyledBoxTitle from './StyledBoxTitle'
 import StyledSubjectTPI from './StyledSubjectTPI'
+import DeleteSubjectButton from 'components/DeleteSubjectButton'
 
-const SubjectBox: React.FC<SubjectBoxProps> = ({
+const SubjectBox: React.FC<any> = ({
+  id,
   name,
   teorical,
   practical,
   individual,
-  type
+  type,
+  quadri
 }): JSX.Element => {
   return (
     <StyledSubjectBox type={type}>
+      <DeleteSubjectButton
+        subject={{
+          id,
+          name,
+          teorical,
+          practical,
+          individual,
+          type
+        }}
+        quadri={quadri}
+      />
       <StyledBoxTitle name={name} />
       <StyledSubjectTPI
         teorical={teorical}

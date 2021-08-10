@@ -4,7 +4,7 @@ import { useCallback } from 'react'
 import { useState } from 'react'
 import { Subject } from 'types'
 import { SubjectContextProps } from 'types'
-import { curso, todasMaterias } from 'api/mocks'
+import { matricula, todasMaterias } from 'api/mocks'
 
 const SubjectsContext = createContext<SubjectContextProps>({
   subjects: [[]],
@@ -23,18 +23,24 @@ const SubjectsContext = createContext<SubjectContextProps>({
   },
   handleRemoveAvailableSubject: () => {
     // default value.
+  },
+  handleRemoveQuadri: () => {
+    // default value.
+  },
+  handleRemoveSubject: () => {
+    // default value.
   }
 })
 
 const SubjectsProvider: React.FC = ({ children }) => {
-  const [subjects, setSubjects] = useState<Subject[][]>(curso)
+  const [subjects, setSubjects] = useState<Subject[][]>(matricula.disciplinas)
   const [allAvailableSubjects, setAllAvailableSubjects] = useState<Subject[]>(
     []
   )
 
   useEffect(() => {
     const doneSubjects: Subject[] = []
-    curso.forEach((subjects) => {
+    matricula.disciplinas.forEach((subjects) => {
       doneSubjects.push(...subjects)
     }, [])
     const subjectsToAdd = todasMaterias.filter(
@@ -43,16 +49,15 @@ const SubjectsProvider: React.FC = ({ children }) => {
     setAllAvailableSubjects(subjectsToAdd)
   }, [])
 
-  useEffect(() => {
-    console.log(subjects)
-  }, [subjects])
-
-  const handleRemoveAvailableSubject = useCallback((subject: Subject): void => {
-    setAllAvailableSubjects((sbjs) => {
-      sbjs.splice(sbjs.indexOf(subject), 1)
-      return sbjs
-    })
-  }, [])
+  const handleRemoveAvailableSubject = useCallback(
+    (subject: Subject): void => {
+      const allSubjects = allAvailableSubjects
+      setAllAvailableSubjects(
+        allSubjects.filter((sub) => sub.id !== subject.id)
+      )
+    },
+    [allAvailableSubjects]
+  )
 
   const handleAddAvailableSubject = useCallback((subject: Subject): void => {
     setAllAvailableSubjects((sbjs) => {
@@ -67,17 +72,44 @@ const SubjectsProvider: React.FC = ({ children }) => {
 
   const handleAddSubject = useCallback(
     (subject: Subject, quadri: number): void => {
-      setSubjects((sbjs) => {
-        sbjs[quadri - 1].push(subject)
-        return sbjs
-      })
+      const subjectsArray = [...subjects]
+      subjectsArray[quadri - 1].push(subject)
+      setSubjects(subjectsArray)
+      handleRemoveAvailableSubject(subject)
     },
-    []
+    [setSubjects, subjects, handleRemoveAvailableSubject]
+  )
+
+  const handleRemoveSubject = useCallback(
+    (subject: Subject, quadri: number): void => {
+      const subjectsArray = [...subjects]
+      const row = subjectsArray[quadri - 1].filter(
+        (sub) => sub.id !== subject.id
+      )
+      subjectsArray[quadri - 1] = row
+      setSubjects(subjectsArray)
+      setAllAvailableSubjects((subs) =>
+        [...subs, subject].sort((a, b) => (a.id > b.id ? 1 : -1))
+      )
+    },
+    [setSubjects, subjects]
   )
 
   const handleAddQuadri = useCallback((): void => {
     setSubjects([...subjects, []])
   }, [setSubjects, subjects])
+
+  const handleRemoveQuadri = useCallback(
+    (quadri: number): void => {
+      setAllAvailableSubjects((subs) =>
+        [...subs, ...subjects[quadri - 1]].sort((a, b) =>
+          a.id > b.id ? 1 : -1
+        )
+      )
+      setSubjects(subjects.filter((_, index) => index !== quadri - 1))
+    },
+    [setSubjects, subjects]
+  )
 
   return (
     <SubjectsContext.Provider
@@ -88,7 +120,9 @@ const SubjectsProvider: React.FC = ({ children }) => {
         handleAddAvailableSubject,
         handleSetSubjects,
         handleAddSubject,
-        handleAddQuadri
+        handleRemoveSubject,
+        handleAddQuadri,
+        handleRemoveQuadri
       }}
     >
       {children}
