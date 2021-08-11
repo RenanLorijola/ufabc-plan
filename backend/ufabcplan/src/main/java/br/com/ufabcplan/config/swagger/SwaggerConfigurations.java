@@ -1,6 +1,5 @@
 package br.com.ufabcplan.config.swagger;
 
-import br.com.ufabcplan.aluno.Aluno;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import springfox.documentation.builders.ParameterBuilder;

@@ -1,23 +1,29 @@
 package br.com.ufabcplan.matricula.quadrimestre;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
+import javax.transaction.Transactional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
 import br.com.ufabcplan.aluno.Aluno;
 import br.com.ufabcplan.aluno.AlunoRepository;
-import br.com.ufabcplan.curso.bachareladointerdiciplinar.BachareladoInterdiciplinar;
-import br.com.ufabcplan.curso.cursoespecifico.CursoEspecifico;
 import br.com.ufabcplan.curso.relacionamento.disciplina_bachareladointerdiciplinar.DisciplinaBachareladoInterdiciplinarRepository;
 import br.com.ufabcplan.disciplina.Disciplina;
-import br.com.ufabcplan.disciplina.DisciplinaDetalheResponse;
 import br.com.ufabcplan.disciplina.DisciplinaRepository;
 import br.com.ufabcplan.matricula.Matricula;
 import br.com.ufabcplan.matricula.MatriculaDisciplinaRequest;
 import br.com.ufabcplan.matricula.MatriculaRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-
-import javax.transaction.Transactional;
-import java.util.List;
-import java.util.stream.Collectors;
+import br.com.ufabcplan.matricula.MatriculaService;
 
 @RestController
 @RequestMapping("/matriculas/{idAluno}")
@@ -31,9 +37,10 @@ public class QuadrimestreController {
     private DisciplinaRepository disciplinaRepository;
     @Autowired
     private MatriculaRepository matriculaRepository;
-
     @Autowired
     private DisciplinaBachareladoInterdiciplinarRepository DBRepository;
+    @Autowired
+    private MatriculaService matriculaService;
 
     @GetMapping("/quadrimestre")
     public ResponseEntity<List<QuadrimestreTodosResponse>> consultarQuadrimestres(@PathVariable("idAluno") Long idAluno) {
@@ -83,11 +90,10 @@ public class QuadrimestreController {
         Quadrimestre quadrimestre = quadrimestreRepository.getById(request.getQuadrimestreId());
         Disciplina disciplina = disciplinaRepository.getById(request.getDisciplinaId());
 
-        Integer creditos = disciplina.getCreditos();
-
-
         quadrimestre.adicionarDisciplina(disciplina);
         quadrimestreRepository.save(quadrimestre);
+
+        matriculaService.somarCredito(matricula, disciplina);
 
         return ResponseEntity.ok().build();
     }

@@ -83,16 +83,32 @@ public class Matricula {
 		return livre;
 	}
 
+	public void setLivre(Integer livre) {
+		this.livre = livre;
+	}
+
 	public Integer getLimitada() {
 		return limitada;
+	}
+
+	public void setLimitada(Integer limitada) {
+		this.limitada = limitada;
 	}
 
 	public Integer getObrigatoriaCE() {
 		return obrigatoriaCE;
 	}
 
+	public void setObrigatoriaCE(Integer obrigatoriaCE) {
+		this.obrigatoriaCE = obrigatoriaCE;
+	}
+
 	public Integer getObrigatoriaBi() {
 		return obrigatoriaBi;
+	}
+
+	public void setObrigatoriaBi(Integer obrigatoriaBi) {
+		this.obrigatoriaBi = obrigatoriaBi;
 	}
 
 	public CursoEspecifico getCursoEspecifico() {
