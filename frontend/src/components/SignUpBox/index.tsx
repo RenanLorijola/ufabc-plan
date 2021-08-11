@@ -1,7 +1,7 @@
-import React, { ChangeEvent, useState } from 'react'
+import React, { ChangeEvent, useEffect, useState } from 'react'
 import { useUser } from 'context/userContext'
 import { Box, Button, Grid, TextField, Typography } from '@material-ui/core'
-/* eslint-disable */
+
 const SignUpBox: React.FC = (): JSX.Element => {
   const { updateUser } = useUser()
 
@@ -17,22 +17,34 @@ const SignUpBox: React.FC = (): JSX.Element => {
     confirmPassword: false
   })
 
-  const handleChangeName = (event:ChangeEvent<HTMLInputElement | HTMLTextAreaElement>): void => {
+  const handleChangeName = (
+    event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ): void => {
     setName(event.target.value)
   }
-  const handleChangeRa = (event:ChangeEvent<HTMLInputElement | HTMLTextAreaElement>): void => {
+  const handleChangeRa = (
+    event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ): void => {
     setRa(event.target.value)
   }
-  const handleChangePassword = (event:ChangeEvent<HTMLInputElement | HTMLTextAreaElement>): void => {
+  const handleChangePassword = (
+    event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ): void => {
     setPassword(event.target.value)
   }
-  const handleChangeConfirm = (event:ChangeEvent<HTMLInputElement | HTMLTextAreaElement>): void => {
+  const handleChangeConfirm = (
+    event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ): void => {
     setConfirmPassword(event.target.value)
   }
 
-  const handleValidation = () => {
+  const handleValidation = (): void => {
     setErrors({ ...errors })
   }
+
+  useEffect(() => {
+    handleValidation()
+  }, [ra, password])
 
   const handleCreateUser = (): void => {
     updateUser()
@@ -63,10 +75,11 @@ const SignUpBox: React.FC = (): JSX.Element => {
           <TextField
             sx={{ marginTop: 2, width: '80%', marginLeft: '10%' }}
             variant="outlined"
-            label="Nome *"
+            label="Nome"
             name="name"
             error={errors.name}
             helperText=""
+            required
             value={name}
             onChange={handleChangeName}
           />
@@ -75,10 +88,11 @@ const SignUpBox: React.FC = (): JSX.Element => {
           <TextField
             sx={{ marginTop: 2, width: '80%', marginLeft: '10%' }}
             variant="outlined"
-            label="RA *"
+            label="RA"
             name="ra"
             error={errors.ra}
             helperText=""
+            required
             value={ra}
             onChange={handleChangeRa}
           />
@@ -87,10 +101,11 @@ const SignUpBox: React.FC = (): JSX.Element => {
           <TextField
             sx={{ marginTop: 2, width: '80%', marginLeft: '10%' }}
             variant="outlined"
-            label="Senha *"
+            label="Senha"
             name="password"
             error={errors.password}
             helperText=""
+            required
             value={password}
             onChange={handleChangePassword}
           />
@@ -99,10 +114,11 @@ const SignUpBox: React.FC = (): JSX.Element => {
           <TextField
             sx={{ marginTop: 2, width: '80%', marginLeft: '10%' }}
             variant="outlined"
-            label="Confirme a senha *"
+            label="Confirme a senha"
             name="confirmPassword"
             error={errors.confirmPassword}
             helperText=""
+            required
             value={confirmPassword}
             onChange={handleChangeConfirm}
           />

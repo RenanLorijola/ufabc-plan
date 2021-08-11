@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useState } from 'react'
+import React, { ChangeEvent, useState, useEffect } from 'react'
 import { useUser } from 'context/userContext'
 import { Box, Button, Grid, TextField, Typography } from '@material-ui/core'
 
@@ -12,12 +12,10 @@ const SignInBox: React.FC = (): JSX.Element => {
   const [ra, setRa] = useState('')
   const [password, setPassword] = useState('')
 
-  // const [errors, setErrors] = useState({
-  //   name: false,
-  //   ra: false,
-  //   password: false,
-  //   confirmPassword: false
-  // })
+  const [errors, setErrors] = useState({
+    ra: false,
+    password: false
+  })
 
   const handleChangeRa = (
     event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -29,6 +27,14 @@ const SignInBox: React.FC = (): JSX.Element => {
   ): void => {
     setPassword(event.target.value)
   }
+
+  const handleValidation = (): void => {
+    setErrors({ ...errors })
+  }
+
+  useEffect(() => {
+    handleValidation()
+  }, [ra, password])
 
   return (
     <Box
@@ -57,9 +63,9 @@ const SignInBox: React.FC = (): JSX.Element => {
           <TextField
             sx={{ marginTop: 2, width: '80%', marginLeft: '10%' }}
             variant="outlined"
-            label="RA *"
+            label="RA"
             name="ra"
-            error
+            error={errors.ra}
             helperText=""
             value={ra}
             onChange={handleChangeRa}
@@ -69,9 +75,9 @@ const SignInBox: React.FC = (): JSX.Element => {
           <TextField
             sx={{ marginTop: 2, width: '80%', marginLeft: '10%' }}
             variant="outlined"
-            label="Senha *"
+            label="Senha"
             name="password"
-            error
+            error={errors.password}
             helperText=""
             value={password}
             onChange={handleChangePassword}
